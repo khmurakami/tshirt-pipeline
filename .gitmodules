@@ -1,0 +1,6 @@
+[submodule "lib/style-transfer-tensorflow"]
+	path = lib/style-transfer-tensorflow
+	url = https://github.com/khmurakami/style-transfer-tensorflow.git
+[submodule "lib/printfulpy"]
+	path = lib/printfulpy
+	url = https://github.com/khmurakami/printfulpy.git
