@@ -4,3 +4,6 @@
 [submodule "lib/printfulpy"]
 	path = lib/printfulpy
 	url = https://github.com/khmurakami/printfulpy.git
+[submodule "lib/gcp-client"]
+	path = lib/gcp-client
+	url = https://github.com/khmurakami/gcp-client.git
