@@ -1,0 +1,9 @@
+[submodule "lib/background_removal"]
+	path = lib/background_removal
+	url = https://gitlab.com/khmurakami/background_removal.git
+[submodule "lib/printfulpy"]
+	path = lib/printfulpy
+	url = https://gitlab.com/khmurakami/printfulpy.git
+[submodule "lib/style-transfer-tensorflow"]
+	path = lib/style-transfer-tensorflow
+	url = https://gitlab.com/khmurakami/style-transfer-tensorflow.git
