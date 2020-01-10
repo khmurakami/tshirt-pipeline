@@ -10,3 +10,5 @@
 - https://pixabay.com/photos/camera-digital-equipment-female-15807/
 - https://pixabay.com/illustrations/guitar-music-instrument-acoustic-4747277/
 - https://pixabay.com/vectors/red-heart-health-love-shape-304570/
+- https://pixabay.com/photos/snowman-winter-grasses-hoarfrost-4674856/
+- https://pixabay.com/photos/sunflower-flower-yellow-bright-4735538/

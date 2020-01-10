@@ -138,6 +138,9 @@ def download_printful_designs(raw_json, folder_path):
 
     # Iterate through the json and append the json fields as the image name and download them
     for i in raw_json["result"]["mockups"]:
+
+        variant_id = str(i["variant_ids"])
+
         for j in i["extra"]:
 
             # Get the options name and clean out spaces and special charcters to name the file
@@ -147,7 +150,7 @@ def download_printful_designs(raw_json, folder_path):
             option_group_lower = j['option_group']
             option_group_lower = ''.join(e for e in option_group_lower if e.isalnum()).lower()
             
-            file_name = os.path.join(dirName, "{0}_{1}.jpg".format(option_lower, option_group_lower))
+            file_name = os.path.join(dirName, "{0}_{1}_{2}.jpg".format(option_lower, option_group_lower, variant_id))
             print(file_name)
 
             # Create the file and save the content to that file

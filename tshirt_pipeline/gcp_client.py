@@ -23,8 +23,10 @@ class GCPBucket():
         """
 
         bucket = self.bucket_client.get_bucket(bucket_name)
-        print(bucket)
-        return bucket
+        if bucket is not None:
+            return True
+        else:
+            return False
 
     def create_bucket(self, bucket_name):
 
