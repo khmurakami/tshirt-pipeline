@@ -12,3 +12,5 @@
 - https://pixabay.com/vectors/red-heart-health-love-shape-304570/
 - https://pixabay.com/photos/snowman-winter-grasses-hoarfrost-4674856/
 - https://pixabay.com/photos/sunflower-flower-yellow-bright-4735538/
+- https://pixabay.com/photos/theravada-buddhism-sayalay-nun-4749025/
+- https://pixabay.com/photos/parrot-bird-feather-color-beak-4747864/

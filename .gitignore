@@ -1,6 +1,8 @@
 # Custom 
 output_folder/
 permutations/
+deeplabv3_pascal_trainval/
+deeplabv3_xception_ade20k_train/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

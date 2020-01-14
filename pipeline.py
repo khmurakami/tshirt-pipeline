@@ -109,7 +109,7 @@ def apply_mask(input_image, input_style, background_nn_model):
                 cropped_copy[j, i] = style_copy[j, i] 
 
     #cv2.imwrite("final.png", cropped_copy)
-    return cropped_copy
+    return cropped_copy, style_copy
 
 def file_generate_tshirt(input_file, input_style, background_model_path, output_folder, printful_api_key):
 
@@ -132,7 +132,7 @@ def file_generate_tshirt(input_file, input_style, background_model_path, output_
 
     # Create and get a mask
     model_path = background_model_path
-    img = apply_mask(input_file, input_style, model_path)
+    cropped_style, style_full = apply_mask(input_file, input_style, model_path)
 
      # Get the file base name to name the output
     input_image_base = os.path.splitext(os.path.basename(input_file))[0]
@@ -142,9 +142,13 @@ def file_generate_tshirt(input_file, input_style, background_model_path, output_
     output_image = input_image_base + "_" + input_style_base
 
     # Save for debugging and uploading to google bucket. dont remove
-    temp_image = "{0}/{1}_test.png".format(output_folder, output_image)
+    cropped_style_image = "{0}/{1}_test.png".format(output_folder, output_image)
+    style_full_image = "{0}/{1}_debug.png".format(output_folder, output_image)
 
-    cv2.imwrite(temp_image, img)
+    cv2.imwrite(cropped_style_image, cropped_style)
+    cv2.imwrite(style_full_image, style_full)
+
+    print("saved debug images")
 
     gcp_client = GCPBucket()
     printful_client = PrintfulPy(
@@ -156,8 +160,8 @@ def file_generate_tshirt(input_file, input_style, background_model_path, output_
     if status is False:
         gcp_client.create_bucket(bucket_name)
 
-    gcp_client.upload_file(bucket_name, "input/{0}".format(temp_image), temp_image)
-    google_download_link = "https://storage.googleapis.com/tshirt_pictures/input/{0}".format(temp_image)
+    gcp_client.upload_file(bucket_name, "input/{0}".format(cropped_style_image), cropped_style_image)
+    google_download_link = "https://storage.googleapis.com/tshirt_pictures/input/{0}".format(cropped_style_image)
     raw_json = printful_client.create_mockup_gen_task(variant_ids=[4012, 4172, 4142, 4112], image_url=google_download_link)
     with open("{0}/mock_up_json.json".format(output_folder), "w") as data_file:
        json.dump(raw_json, data_file, indent=4, sort_keys=True)
@@ -224,13 +228,15 @@ if __name__ == "__main__":
     #remove_text_background("text_creation.png", "remove_text.png")
 
     # Convert all jpgs to pngs and delete pngs
-    #convert_jpg_to_png("input_images")
+    convert_jpg_to_png("input_images")
     #convert_jpg_to_png("input_styles")
 
     # Go through all the permutatiosn within these folders
-    #style_permutations("input_images", "input_styles", "output_folder")
+    #style_permutations("input_images", "input_styles", "output_folder")E
 
-    model_path = "/home/kmurakami/tshirt/tshirt-airflow/lib/background_removal/mobile_net_model/frozen_inference_graph.pb"
+    #model_path = "/home/kmurakami/tshirt/tshirt-airflow/lib/background_removal/mobile_net_model/frozen_inference_graph.pb"
+    model_path = "/home/kmurakami/tshirt/tshirt-airflow/deeplabv3_pascal_trainval/frozen_inference_graph.pb"
+    #model_path = "/home/kmurakami/tshirt/tshirt-airflow/deeplabv3_xception_ade20k_train/frozen_inference_graph.pb"
     file_generate_tshirt_permutations("input_images", "input_styles", model_path, "permutations", "8naldv9l-3gyz-cl2g:yv7r-pwgnxg8e5bjr")
 
 
